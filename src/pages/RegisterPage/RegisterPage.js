@@ -1,23 +1,21 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { login, getMe } from "../../WebAPI";
+import { register, getMe } from "../../WebAPI";
 import { setAuthToken } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import { Wrapper, Container } from "../../layouts/layouts";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
 import {
-  AiOutlineUser as UserIcon,
-  AiOutlineLock as PasswordIcon,
   AiOutlineEye as VisibleIcon,
   AiOutlineEyeInvisible as InvisibleIcon,
 } from "react-icons/ai";
 
-const LoginForm = styled.form`
+const RegisterForm = styled.form`
   position: relative;
   margin: 20% auto;
-  padding: 40px 40px 50px 60px;
+  padding: 40px 40px 50px 40px;
   width: 100%;
   max-width: 400px;
   border-radius: 10px;
@@ -38,19 +36,11 @@ const Title = styled.p`
 const InputContainer = styled.div`
   position: relative;
   margin-bottom: 20px;
-
-  & > svg {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 12px;
-    color: ${({ theme }) => theme.button.submit};
-    font-size: 18px;
-  }
 `;
-const UsernameInput = styled.input`
+
+const InputArea = styled.input`
   width: 100%;
-  padding: 5px 10px 5px 40px;
+  padding: 10px;
   height: 45px;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -61,9 +51,6 @@ const UsernameInput = styled.input`
   &:focus {
     border: 1px solid ${({ theme }) => theme.primary};
   }
-`;
-const PasswordInput = styled(UsernameInput)`
-  padding: 5px 40px 5px 40px;
 `;
 
 const VisibleToggler = styled.div`
@@ -80,7 +67,7 @@ const VisibleToggler = styled.div`
     height: auto;
   }
 `;
-const ToRegisterLink = styled(Link)`
+const ToLoginLink = styled(Link)`
   display: inline-block;
   margin-bottom: 20px;
   text-decoration: none;
@@ -113,33 +100,41 @@ const SubmitButton = styled.button`
   }
 `;
 
+const WarningMessage = styled.div`
+  margin: 12px 0;
+  font-size: 14px;
+  color: ${({ theme }) => theme.text.remind};
+`;
+
 const ErrorMessage = styled.div`
   position: absolute;
   bottom: 12px;
   color: ${({ theme }) => theme.error};
 `;
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password, setPassword] = useState("Lidemy");
   const [isVisible, setIsVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage(null);
-    if (!username || !password) {
+    if (!nickname || !username || !password) {
       e.preventDefault();
-      return setErrorMessage("請輸入帳號及密碼");
+      return setErrorMessage("請輸入帳號、暱稱及密碼");
     }
-    login(username, password).then((data) => {
-      if (data.ok === 0) {
+    register(nickname, username, password).then((data) => {
+      if (data.ok === 0 && data.code === 3) {
+        return setErrorMessage("此帳號已有人使用");
+      } else if (data.ok === 0) {
         return setErrorMessage(data.message);
       }
       setAuthToken(data.token);
-
       getMe().then((res) => {
         if (res.ok !== 1) {
           setAuthToken(null);
@@ -153,6 +148,10 @@ export default function LoginPage() {
 
   const handleInputChange = (e) => {
     setErrorMessage("");
+    if (e.target.name === "nickname") {
+      setNickname(e.target.value);
+    }
+
     if (e.target.name === "username") {
       setUsername(e.target.value);
     }
@@ -168,11 +167,19 @@ export default function LoginPage() {
   return (
     <Wrapper>
       <Container>
-        <LoginForm onSubmit={handleSubmit}>
-          <Title>登入</Title>
+        <RegisterForm onSubmit={handleSubmit}>
+          <Title>註冊</Title>
           <InputContainer>
-            <UserIcon />
-            <UsernameInput
+            <InputArea
+              type="text"
+              name="nickname"
+              value={nickname}
+              placeholder="請輸入暱稱"
+              onChange={handleInputChange}
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputArea
               type="text"
               name="username"
               value={username}
@@ -181,11 +188,10 @@ export default function LoginPage() {
             />
           </InputContainer>
           <InputContainer>
-            <PasswordIcon />
-            <PasswordInput
+            <InputArea
               type={isVisible ? "text" : "password"}
               name="password"
-              value={password}
+              value={"Lidemy"}
               placeholder="請輸入密碼"
               onChange={handleInputChange}
             />
@@ -193,10 +199,11 @@ export default function LoginPage() {
               {isVisible ? <VisibleIcon /> : <InvisibleIcon />}
             </VisibleToggler>
           </InputContainer>
-          <ToRegisterLink to="/register">點此註冊</ToRegisterLink>
-          <SubmitButton>登入</SubmitButton>
+          <WarningMessage>此網站未做加密，密碼皆會更改為預設值</WarningMessage>
+          <ToLoginLink to="/login">已經是會員？點此登入</ToLoginLink>
+          <SubmitButton>註冊</SubmitButton>
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-        </LoginForm>
+        </RegisterForm>
       </Container>
     </Wrapper>
   );

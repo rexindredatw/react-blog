@@ -1,56 +1,124 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import { getPosts } from "../../WebAPI";
+import {
+  MEDIA_QUERY_SM,
+  MEDIA_QUERY_MD,
+  MEDIA_QUERY_LG,
+} from "../../constants/breakpoint";
+import { Wrapper, Container } from "../../layouts/layouts";
+import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
+import { ReactComponent as AvatarImage } from "../../images/avatar.svg";
+import { AiOutlineArrowRight as ArrowRight } from "react-icons/ai";
 
-const Root = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-
-const PostContainer = styled.div`
-  border-bottom: 1px solid rgba(0, 12, 34, 0.2);
-  padding: 16px;
+const BannerContainer = styled.div`
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 60%;
+  max-width: 1200px;
+  & > svg {
+    width: 60%;
+    max-width: 700px;
+    ${MEDIA_QUERY_MD} {
+      width: 100%;
+    }
+  }
+  ${MEDIA_QUERY_LG} {
+    margin: 100px auto;
+    padding: 0 80px;
+    max-width: 1100px;
+  }
+  ${MEDIA_QUERY_MD} {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  ${MEDIA_QUERY_SM} {
+    margin: 60px auto 50px auto;
+    padding: 0 30px;
+  }
 `;
 
-const PostTitle = styled(Link)`
-  font-size: 24px;
-  color: #333;
+const Description = styled.div`
+  width: 32%;
+  line-height: 1.2;
+  h1 {
+    margin-bottom: 15px;
+    font-size: 34px;
+    color: ${({ theme }) => theme.text.primary};
+  }
+  p {
+    color: ${({ theme }) => theme.text.second};
+  }
+  ${MEDIA_QUERY_MD} {
+    margin-top: 60px;
+    width: 100%;
+  }
+`;
+
+const DescriptionButton = styled(Link)`
+  position: relative;
+  display: inline-flex;
+  display: -webkit-inline-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  margin-top: 24px;
+  padding: 8px 40px 8px 20px;
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.text.searchBox};
   text-decoration: none;
+  color: ${({ theme }) => theme.background.primary};
+  z-index: 0;
+  svg {
+    position: absolute;
+    right: 18px;
+    height: 100%;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+  &:hover {
+    svg {
+      right: 15px;
+    }
+  }
 `;
-
-const PostDate = styled.div`
-  color: rgba(0, 0, 0, 0.8);
-`;
-
-function Post({ post }) {
-  return (
-    <PostContainer>
-      <PostTitle to={`/post/${post.id}`}>{post.title}</PostTitle>
-      <PostDate>{new Date(post.createdAt).toLocaleString()}</PostDate>
-    </PostContainer>
-  );
-}
-Post.propTypes = {
-  post: PropTypes.object,
-};
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
+  /*
   useEffect(() => {
-    getPosts().then((posts) => setPosts(posts));
+    setIsLoading(true);
+    getPosts()
+      .then((posts) => {
+        setPosts(posts);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
   }, []);
+  */
 
   return (
-    <Root>
-      {posts.map((post) => (
-        <Post post={post} key={post.id} />
-      ))}
-    </Root>
+    <Wrapper>
+      {isLoading && <Loading />}
+      <BannerContainer>
+        <Description>
+          <h1>Hi, 這是 Rex 的部落格</h1>
+          <p>（網站尚在施工中⋯⋯）</p>
+          <DescriptionButton to="/posts">
+            <span>全部文章</span>
+            <ArrowRight />
+          </DescriptionButton>
+        </Description>
+        <AvatarImage />
+      </BannerContainer>
+      <Container></Container>
+    </Wrapper>
   );
 }
