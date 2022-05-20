@@ -6,6 +6,7 @@ import { SearchContext } from "../../contexts";
 
 const SearchContainer = styled.form`
   display: flex;
+  margin: 0 12px;
 `;
 
 const SearchBar = styled.input`
