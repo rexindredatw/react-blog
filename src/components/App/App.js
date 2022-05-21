@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
@@ -7,6 +6,7 @@ import { AuthContext, ThemeContext, SearchContext } from "../../contexts";
 import themes from "../../themes";
 import { ThemeProvider } from "styled-components";
 import { getMe } from "../../WebAPI";
+import GlobalStyle from "../../layouts/globalStyle";
 
 import {
   HomePage,
@@ -18,10 +18,6 @@ import {
   SearchPage,
   EditPostPage,
 } from "../../pages";
-
-const Root = styled.div`
-  padding-top: 64px;
-`;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,25 +38,21 @@ function App() {
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <SearchContext.Provider value={{ searchData, setSearchData }}>
           <ThemeProvider theme={themeMode}>
-            <Root>
-              <Router>
-                <Header />
-                <Routes>
-                  <Route exact path="/" element={<HomePage />} />
-                  <Route exact path="/login" element={<LoginPage />} />
-                  <Route exact path="/register" element={<RegisterPage />} />
-                  <Route exact path="/add-post" element={<AddPostPage />} />
-                  <Route path="/edit/:id" element={<EditPostPage />} />
-                  <Route exact path="/posts" element={<PostsPage />} />
-                  <Route path="/post/:id" element={<PostPage />} />
-                  <Route
-                    path="/search/:keyword"
-                    element={<SearchPage />}
-                  ></Route>
-                </Routes>
-                <Footer />
-              </Router>
-            </Root>
+            <GlobalStyle />
+            <Router>
+              <Header />
+              <Routes>
+                <Route exact path="/" element={<HomePage />} />
+                <Route exact path="/login" element={<LoginPage />} />
+                <Route exact path="/register" element={<RegisterPage />} />
+                <Route exact path="/add-post" element={<AddPostPage />} />
+                <Route path="/edit/:id" element={<EditPostPage />} />
+                <Route exact path="/posts" element={<PostsPage />} />
+                <Route path="/post/:id" element={<PostPage />} />
+                <Route path="/search/:keyword" element={<SearchPage />}></Route>
+              </Routes>
+              <Footer />
+            </Router>
           </ThemeProvider>
         </SearchContext.Provider>
       </ThemeContext.Provider>

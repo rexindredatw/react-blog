@@ -3,6 +3,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import styled from "styled-components";
 import { getPosts } from "../../WebAPI";
 import db from "../../firebase";
+import { Wrapper, Container } from "../../layouts/layouts";
 import { collection, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Post from "../../components/Post";
@@ -10,11 +11,6 @@ import Loading from "../../components/Loading";
 import { AiOutlineConsoleSql } from "react-icons/ai";
 
 let PageSize = 5;
-
-const Root = styled.div`
-  width: 60%;
-  margin: 48px auto;
-`;
 
 const Posts = styled.ul`
   margin: 0 0 30px 0;
@@ -53,21 +49,23 @@ export default function PostsPage() {
   }, [currentPage, posts]);
 
   return (
-    <Root>
-      <Posts>
-        {isLoading && <Loading />}
-        {currentTableData &&
-          currentTableData.map((post) => <Post post={post} key={post.id} />)}
-      </Posts>
-      {currentTableData && (
-        <Pagination
-          className="pagination-bar"
-          currentPage={currentPage}
-          totalCount={posts.length}
-          pageSize={PageSize}
-          onPageChange={(page) => setCurrentPage(page)}
-        ></Pagination>
-      )}
-    </Root>
+    <Wrapper>
+      <Container>
+        <Posts>
+          {isLoading && <Loading />}
+          {currentTableData &&
+            currentTableData.map((post) => <Post post={post} key={post.id} />)}
+        </Posts>
+        {currentTableData && (
+          <Pagination
+            className="pagination-bar"
+            currentPage={currentPage}
+            totalCount={posts.length}
+            pageSize={PageSize}
+            onPageChange={(page) => setCurrentPage(page)}
+          ></Pagination>
+        )}
+      </Container>
+    </Wrapper>
   );
 }
