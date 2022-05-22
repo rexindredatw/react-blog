@@ -1,3 +1,5 @@
+import moment from "moment-timezone";
+
 const TOKEN_NAME = "token";
 const THEME_NAME = "theme";
 
@@ -15,4 +17,8 @@ export const setLocalMode = (mode) => {
 
 export const getLocalMode = () => {
   return localStorage.getItem(THEME_NAME);
+};
+
+export const formatTime = (time) => {
+  return moment(time).tz("Asia/Taipei").format("YYYY-MM-DD");
 };

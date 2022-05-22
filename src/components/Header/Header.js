@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import { setAuthToken } from "../../utils";
-import SearchBox from "../Search";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
-import ModeToggler from "../ModeToggler/ModeToggler";
+import SearchBox from "../Search";
+import ModeToggler from "../ModeToggler";
 
 const HeaderContainer = styled.header`
   height: 64px;

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import {
   MEDIA_QUERY_SM,
   MEDIA_QUERY_MD,
   MEDIA_QUERY_LG,
 } from "../../constants/breakpoint";
-import { Wrapper, Container } from "../../layouts/layouts";
-import Loading from "../../components/Loading";
+import { Wrapper } from "../../layouts/layouts";
 import { Link } from "react-router-dom";
 import { ReactComponent as AvatarImage } from "../../images/avatar.svg";
 import { AiOutlineArrowRight as ArrowRight } from "react-icons/ai";
@@ -86,27 +85,8 @@ const DescriptionButton = styled(Link)`
 `;
 
 export default function HomePage() {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  /*
-  useEffect(() => {
-    setIsLoading(true);
-    getPosts()
-      .then((posts) => {
-        setPosts(posts);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
-  }, []);
-  */
-
   return (
     <Wrapper>
-      {isLoading && <Loading />}
       <BannerContainer>
         <Description>
           <h1>Hi, 這是 Rex 的部落格</h1>
@@ -118,7 +98,6 @@ export default function HomePage() {
         </Description>
         <AvatarImage />
       </BannerContainer>
-      <Container></Container>
     </Wrapper>
   );
 }

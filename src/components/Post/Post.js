@@ -5,6 +5,7 @@ import {
   AiOutlineCalendar as DateIcon,
   AiOutlineUser as AuthorIcon,
 } from "react-icons/ai";
+import { formatTime } from "../../utils";
 
 const PostItem = styled.li`
   display: flex;
@@ -16,10 +17,14 @@ const PostItem = styled.li`
   transition: all 0.3s ease 0s;
   :hover {
     opacity: 0.5;
+    a {
+      color: red;
+    }
   }
   background-color: ${({ theme }) => theme.background.opacity};
+
   ${MEDIA_QUERY_SM} {
-    padding: 20px;
+    padding: 40px;
   }
 `;
 
@@ -27,7 +32,7 @@ const PostLeftContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10%;
+  width: 15%;
   margin-right: 24px;
 `;
 
@@ -54,9 +59,6 @@ const PostTitle = styled(Link)`
   color: ${({ theme }) => theme.text.primary};
   font-size: 22px;
   font-weight: 500;
-  :hover {
-    color: red;
-  }
   ${MEDIA_QUERY_SM} {
     font-size: 20px;
   }
@@ -65,7 +67,8 @@ const PostTitle = styled(Link)`
 const PostAuthor = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 12px;
+  color: ${({ theme }) => theme.text.second};
   svg {
     margin-right: 3px;
     color: ${({ theme }) => theme.text.second};
@@ -88,7 +91,7 @@ export default function Post({ post }) {
       <PostLeftContainer>
         <PostDate>
           <DateIcon />
-          {new Date(post.createdAt).toLocaleDateString()}
+          {formatTime(post.createdAt)}
         </PostDate>
       </PostLeftContainer>
       <PostRightContainer>
@@ -96,7 +99,7 @@ export default function Post({ post }) {
           <PostTitle to={`/post/${post.id}`}>{post.title}</PostTitle>
           <PostAuthor>
             <AuthorIcon />
-            {post.user}
+            {post.user.nickname}
           </PostAuthor>
         </PostHeader>
         <PostContent>
