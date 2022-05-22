@@ -4,10 +4,13 @@
 
 ### 這是使用 React, react-router-dom 及串接 Lidemy API 實作的 SPA 部落格
 
-測試帳號：xxx 
-測試密碼：xxx
 
-DEMO（超連結）
+> 測試帳號：test 
+> 
+> 測試密碼：Lidemy
+
+[DEMO](https://rexindredatw.github.io/react-blog/)
+
 [Lidemy API](https://github.com/Lidemy/lidemy-student-json-api-server)
 
 ---
