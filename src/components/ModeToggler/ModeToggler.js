@@ -16,7 +16,6 @@ const ThemeToggler = styled.div`
   padding: 7px 13px;
   width: fit-content;
   list-style: none;
-  color: rgb(239, 242, 245);
   border: 2px solid ${({ theme }) => theme.text.primary};
   border-radius: 50px;
   cursor: pointer;

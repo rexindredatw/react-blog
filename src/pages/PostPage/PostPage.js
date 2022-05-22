@@ -20,7 +20,6 @@ const PostToolHeader = styled.div`
   justify-content: flex-end;
   margin-bottom: 15px;
   padding: 0 25px;
-  color: #505050;
   svg {
     margin-right: 3px;
     font-size: 16px;
@@ -93,6 +92,7 @@ const PostTitle = styled.div`
 const PostBody = styled.div`
   padding: 25px;
 `;
+
 const PostContent = styled.p`
   color: ${({ theme }) => theme.text.primary};
   line-height: 1.5;
