@@ -24,10 +24,12 @@ const BannerContainer = styled.div`
     ${MEDIA_QUERY_MD} {
       width: 100%;
     }
+    ${MEDIA_QUERY_LG} {
+      width: 100%;
+    }
   }
   ${MEDIA_QUERY_LG} {
     margin: 100px auto;
-    padding: 0 80px;
     max-width: 1100px;
   }
   ${MEDIA_QUERY_MD} {
@@ -35,8 +37,9 @@ const BannerContainer = styled.div`
     flex-direction: column-reverse;
   }
   ${MEDIA_QUERY_SM} {
-    margin: 60px auto 50px auto;
+    margin: 0 auto;
     padding: 0 30px;
+    height: 475px;
   }
 `;
 
@@ -51,9 +54,16 @@ const Description = styled.div`
   p {
     color: ${({ theme }) => theme.text.second};
   }
+  ${MEDIA_QUERY_LG} {
+    width: 100%;
+  }
   ${MEDIA_QUERY_MD} {
     margin-top: 60px;
     width: 100%;
+  }
+  ${MEDIA_QUERY_SM} {
+    margin-top: 24px;
+    width: 200%;
   }
 `;
 

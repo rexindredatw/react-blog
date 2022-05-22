@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import { setAuthToken } from "../../utils";
-import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
+import { MEDIA_QUERY_SM, MEDIA_QUERY_LG } from "../../constants/breakpoint";
 import SearchBox from "../Search";
 import ModeToggler from "../ModeToggler";
 
@@ -20,6 +20,11 @@ const HeaderContainer = styled.header`
   box-sizing: border-box;
   background: ${({ theme }) => theme.background.body};
   border-bottom: 1px solid ${({ theme }) => theme.text.primary};
+  ${MEDIA_QUERY_LG} {
+    justify-content: space-between;
+    height: 120px;
+    padding: 0 30px;
+  }
   ${MEDIA_QUERY_SM} {
     justify-content: space-evenly;
     flex-direction: column;
@@ -104,14 +109,14 @@ export default function Header() {
         <Brand to="/">Rex Blog</Brand>
         <NavbarList>
           <NavItem to="/" $active={location.pathname === "/"}>
-            Homepage
+            首頁
           </NavItem>
           <NavItem to="/posts" $active={location.pathname === "/posts"}>
-            Posts
+            文章列表
           </NavItem>
           {user && (
             <NavItem to="/add-post" $active={location.pathname === "/add-post"}>
-              New Post
+              新增文章
             </NavItem>
           )}
         </NavbarList>
@@ -121,17 +126,17 @@ export default function Header() {
         <SearchBox />
         {!user && (
           <NavItem to="/login" $active={location.pathname === "/login"}>
-            Login
+            登入
           </NavItem>
         )}
         {!user && (
           <NavItem to="/register" $active={location.pathname === "/register"}>
-            Register
+            註冊
           </NavItem>
         )}
         {user && (
           <NavItem to="/" onClick={handleLogOut}>
-            Logout
+            登出
           </NavItem>
         )}
       </NavbarList>

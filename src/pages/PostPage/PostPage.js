@@ -33,6 +33,7 @@ const PostEdit = styled(Link)`
   border-radius: 3px;
   text-decoration: none;
   font-size: 15px;
+  background-color: ${({ theme }) => theme.background.searchBox};
   color: ${({ theme }) => theme.text.searchBox};
   border: 1px solid ${({ theme }) => theme.text.searchBox};
   transition: 0.3s;
@@ -49,6 +50,7 @@ const PostDelete = styled.div`
   border-radius: 3px;
   margin-left: 15px;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.background.searchBox};
   color: ${({ theme }) => theme.text.searchBox};
   border: 1px solid ${({ theme }) => theme.text.searchBox};
   transition: 0.3s;
@@ -131,6 +133,9 @@ const PostDate = styled.div`
 const PostLink = styled(Link)`
   align-self: center;
   height: 16px;
+  svg {
+    color: ${({ theme }) => theme.text.primary};
+  }
 `;
 
 export default function PostPage() {

@@ -63,8 +63,8 @@ const SubmitReminder = styled.div`
 
 const SubmitButton = styled.button`
   padding: 10px 40px;
-  background-color: ${({ theme }) => theme.button.submit};
-  color: ${({ theme }) => theme.text.negative};
+  background-color: ${({ theme }) => theme.background.searchBox};
+  color: ${({ theme }) => theme.text.searchBox};
   border: transparent;
   border-radius: 3px;
   font-size: 16px;

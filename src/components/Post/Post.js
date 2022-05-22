@@ -24,7 +24,7 @@ const PostItem = styled.li`
   background-color: ${({ theme }) => theme.background.opacity};
 
   ${MEDIA_QUERY_SM} {
-    padding: 40px;
+    padding: 24px;
   }
 `;
 
@@ -34,10 +34,16 @@ const PostLeftContainer = styled.div`
   align-items: center;
   width: 15%;
   margin-right: 24px;
+  ${MEDIA_QUERY_SM} {
+    display: none;
+  }
 `;
 
 const PostRightContainer = styled.div`
   width: 80%;
+  ${MEDIA_QUERY_SM} {
+    width: 100%;
+  }
 `;
 
 const PostDate = styled.div`
@@ -52,6 +58,9 @@ const PostDate = styled.div`
 const PostHeader = styled.div`
   display: flex;
   align-items: center;
+  ${MEDIA_QUERY_SM} {
+    flex-wrap: wrap;
+  }
 `;
 
 const PostTitle = styled(Link)`
@@ -73,6 +82,9 @@ const PostAuthor = styled.div`
   svg {
     margin-right: 3px;
     color: ${({ theme }) => theme.text.second};
+  }
+  ${MEDIA_QUERY_SM} {
+    display: none;
   }
 `;
 

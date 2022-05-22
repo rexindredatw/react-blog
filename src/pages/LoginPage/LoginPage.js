@@ -101,8 +101,8 @@ const ToRegisterLink = styled(Link)`
 const SubmitButton = styled.button`
   width: 100%;
   padding: 4px 0;
-  color: ${({ theme }) => theme.text.negative};
-  background-color: ${({ theme }) => theme.button.submit};
+  color: ${({ theme }) => theme.text.searchBox};
+  background-color: ${({ theme }) => theme.background.searchBox};
   border: transparent;
   border-radius: 4px;
   font-size: 14px;
