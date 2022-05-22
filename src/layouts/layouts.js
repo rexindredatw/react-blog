@@ -3,9 +3,11 @@ import { MEDIA_QUERY_SM } from "../constants/breakpoint";
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  min-height: calc(100vh-206px);
+  padding-top: 5%;
+  min-height: calc(100vh - 96px);
   ${MEDIA_QUERY_SM} {
-    min-height: calc(100vh-216px);
+    padding-top: 55%;
+    min-height: calc(100vh - 106px);
   }
 `;
 

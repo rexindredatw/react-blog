@@ -53,7 +53,7 @@ const ContentTextarea = styled.textarea`
   }
 `;
 
-const SubmitAndRemind = styled.div`
+const SubmitReminder = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -96,13 +96,16 @@ export default function PostEdit({
   setErrorMessage,
 }) {
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    const inputActions = {
+      title: (val) => setPostTitle(val),
+      content: (val) => setPostContent(val),
+    };
+
     setErrorMessage("");
-    if (e.target.name === "title") {
-      setPostTitle(e.target.value);
-    }
-    if (e.target.name === "content") {
-      setPostContent(e.target.value);
-    }
+
+    inputActions[name](value);
   };
   return (
     <AddArticleForm onSubmit={handleSubmit}>
@@ -121,10 +124,10 @@ export default function PostEdit({
         value={postContent}
         onChange={handleInputChange}
       />
-      <SubmitAndRemind>
+      <SubmitReminder>
         {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
         <SubmitButton>送出文章</SubmitButton>
-      </SubmitAndRemind>
+      </SubmitReminder>
     </AddArticleForm>
   );
 }

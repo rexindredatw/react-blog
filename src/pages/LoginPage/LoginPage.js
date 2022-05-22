@@ -152,13 +152,16 @@ export default function LoginPage() {
   };
 
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    const inputActions = {
+      username: (val) => setUsername(val),
+      password: (val) => setPassword(val),
+    };
+
     setErrorMessage("");
-    if (e.target.name === "username") {
-      setUsername(e.target.value);
-    }
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
+
+    inputActions[name](value);
   };
 
   const handleToggleVisible = () => {

@@ -147,17 +147,17 @@ export default function RegisterPage() {
   };
 
   const handleInputChange = (e) => {
-    setErrorMessage("");
-    if (e.target.name === "nickname") {
-      setNickname(e.target.value);
-    }
+    const { name, value } = e.target;
 
-    if (e.target.name === "username") {
-      setUsername(e.target.value);
-    }
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
+    const inputActions = {
+      nickname: (val) => setNickname(val),
+      username: (val) => setUsername(val),
+      password: (val) => setPassword(val),
+    };
+
+    setErrorMessage("");
+
+    inputActions[name](value);
   };
 
   const handleToggleVisible = () => {

@@ -8,8 +8,14 @@ export const getPost = (id) => {
 };
 
 export const getPosts = () => {
-  return fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc`).then((res) =>
-    res.json()
+  return fetch(
+    `${BASE_URL}/posts?_sort=createdAt&_order=desc&_expand=user`
+  ).then((res) => res.json());
+};
+
+export const getLimitPosts = (page, limit) => {
+  return fetch(
+    `${BASE_URL}/posts?_sort=createdAt&_order=desc&_expand=user&_page=${page}&_limit=${limit}`
   );
 };
 

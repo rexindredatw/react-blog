@@ -1,24 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import { setAuthToken } from "../../utils";
-import SearchBox from "../Search";
 import { MEDIA_QUERY_SM } from "../../constants/breakpoint";
+import SearchBox from "../Search";
+import ModeToggler from "../ModeToggler";
 
 const HeaderContainer = styled.header`
   height: 64px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding: 0 25%;
+  padding: 0 20%;
   box-sizing: border-box;
   background: ${({ theme }) => theme.background.body};
   border-bottom: 1px solid ${({ theme }) => theme.text.primary};
+  ${MEDIA_QUERY_SM} {
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 200px;
+    padding: 0 30px;
+  }
 `;
 
 const Brand = styled(Link)`
@@ -28,50 +35,6 @@ const Brand = styled(Link)`
   text-decoration: none;
   cursor: pointer;
   color: ${({ theme }) => theme.primary};
-`;
-
-const HamburgerTop = styled.span`
-  top: 17px;
-`;
-
-const HamburgerMiddle = styled.span`
-  top: 24px;
-`;
-
-const HamburgerBottom = styled.span`
-  bottom: 17px;
-`;
-
-const HamburgerMenu = styled.div`
-  position: relative;
-  margin-right: 12px;
-  width: 50px;
-  height: 50px;
-  background-color: ${({ theme }) => theme.button.menu};
-  border-radius: 50%;
-  box-shadow: 0 0 30px rgba(0, 81, 195, 0.1);
-  cursor: pointer;
-  transition: 0.3s;
-  span {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 18px;
-    height: 2px;
-    background-color: #0051c3;
-    transition: 0.3s;
-  }
-  &:hover {
-    ${HamburgerTop} {
-      top: 15px;
-    }
-    ${HamburgerBottom} {
-      bottom: 15px;
-    }
-  }
-  ${MEDIA_QUERY_SM} {
-    margin-left: 20px;
-  }
 `;
 
 const NavbarList = styled.div`
@@ -89,7 +52,7 @@ const NavItem = styled(Link)`
   width: fit-content;
   padding: 0 12px 0 12px;
   cursor: pointer;
-  color: black;
+  color: ${({ theme }) => theme.text.primary};
   text-decoration: none;
   transition: all 0.3s ease;
   letter-spacing: 0.08rem;
@@ -116,11 +79,6 @@ const NavItem = styled(Link)`
   }
 `;
 
-/*
-background: linear-gradient(to bottom, transparent 62%, #fff87e 0) left
-center/0% 75% no-repeat;
-*/
-
 const LeftContainer = styled.div`
   display: flex;
   align-items: center;
@@ -130,25 +88,19 @@ const LeftContainer = styled.div`
 `;
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const location = useLocation();
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
+
   const handleLogOut = () => {
     setAuthToken("");
     setUser(null);
     if (location.pathname !== "/") navigate("/");
   };
-  const handleMenuClick = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <HeaderContainer>
       <LeftContainer>
-        <HamburgerMenu onClick={handleMenuClick}>
-          <HamburgerTop />
-          <HamburgerMiddle />
-          <HamburgerBottom />
-        </HamburgerMenu>
         <Brand to="/">Rex Blog</Brand>
         <NavbarList>
           <NavItem to="/" $active={location.pathname === "/"}>
@@ -165,6 +117,7 @@ export default function Header() {
         </NavbarList>
       </LeftContainer>
       <NavbarList>
+        <ModeToggler />
         <SearchBox />
         {!user && (
           <NavItem to="/login" $active={location.pathname === "/login"}>

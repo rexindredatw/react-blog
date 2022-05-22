@@ -13,6 +13,7 @@ import {
   AiOutlineCalendar as CalendarIcon,
   AiOutlineUser as PersonIcon,
 } from "react-icons/ai";
+import { formatTime } from "../../utils";
 
 const PostToolHeader = styled.div`
   display: flex;
@@ -33,12 +34,12 @@ const PostEdit = styled(Link)`
   border-radius: 3px;
   text-decoration: none;
   font-size: 15px;
-  color: ${({ theme }) => theme.button.modify};
-  border: 1px solid ${({ theme }) => theme.button.modify};
+  color: ${({ theme }) => theme.text.searchBox};
+  border: 1px solid ${({ theme }) => theme.text.searchBox};
   transition: 0.3s;
   &:hover {
-    background-color: ${({ theme }) => theme.button.modify};
-    color: ${({ theme }) => theme.background.body};
+    background-color: ${({ theme }) => theme.text.searchBox};
+    color: ${({ theme }) => theme.background.searchBox};
   }
 `;
 
@@ -49,12 +50,12 @@ const PostDelete = styled.div`
   border-radius: 3px;
   margin-left: 15px;
   cursor: pointer;
-  color: ${({ theme }) => theme.button.modify};
-  border: 1px solid ${({ theme }) => theme.button.modify};
+  color: ${({ theme }) => theme.text.searchBox};
+  border: 1px solid ${({ theme }) => theme.text.searchBox};
   transition: 0.3s;
   &:hover {
-    background-color: ${({ theme }) => theme.button.modify};
-    color: ${({ theme }) => theme.background.body};
+    background-color: ${({ theme }) => theme.text.searchBox};
+    color: ${({ theme }) => theme.background.searchBox};
   }
 `;
 
@@ -107,14 +108,24 @@ const PostInfo = styled.div`
 `;
 const PostAuthor = styled.div`
   color: ${({ theme }) => theme.text.second};
-  font-size: 12px;
+  font-size: 16px;
   white-space: pre-wrap;
+  display: flex;
+  align-items: center;
+  & > svg {
+    margin-right: 4px;
+  }
 `;
 
 const PostDate = styled.div`
   color: ${({ theme }) => theme.text.second};
-  font-size: 12px;
+  font-size: 16px;
   white-space: pre-wrap;
+  display: flex;
+  align-items: center;
+  & > svg {
+    margin-right: 4px;
+  }
 `;
 
 const PostLink = styled(Link)`
@@ -166,7 +177,6 @@ export default function PostPage() {
             </PostDelete>
           </PostToolHeader>
         )}
-        {console.log(post)}
         {post && (
           <PostContainer>
             <PostHeader>
@@ -177,10 +187,16 @@ export default function PostPage() {
             </PostHeader>
             <PostBody>
               <PostInfo>
-                <PostAuthor>{`作者:  ${postAuthor}`}</PostAuthor>
-                <PostDate>{`時間:  ${post.createdAt}`}</PostDate>
+                <PostAuthor>
+                  <PersonIcon />
+                  {`作者:  ${postAuthor}`}
+                </PostAuthor>
+                <PostDate>
+                  <CalendarIcon />
+                  {`時間:  ${formatTime(post.createdAt)}`}
+                </PostDate>
               </PostInfo>
-              <PostContent>${post.body}</PostContent>
+              <PostContent>{post.body}</PostContent>
             </PostBody>
           </PostContainer>
         )}

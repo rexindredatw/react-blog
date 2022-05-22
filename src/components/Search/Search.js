@@ -6,6 +6,7 @@ import { SearchContext } from "../../contexts";
 
 const SearchContainer = styled.form`
   display: flex;
+  margin: 0 12px;
 `;
 
 const SearchBar = styled.input`
@@ -53,7 +54,7 @@ export default function SearchBox() {
       <SearchBar
         type="text"
         value={searchContent}
-        placeholder="Search"
+        placeholder="尋找..."
         onChange={handleSearchChange}
       />
       <SearchButton type="submit">
