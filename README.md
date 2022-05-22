@@ -13,6 +13,9 @@
 
 [Lidemy API](https://github.com/Lidemy/lidemy-student-json-api-server)
 
+
+![image](https://github.com/rexindredatw/react-blog/blob/master/react-blog.png?raw=true)
+
 ---
 
 #### 功能
