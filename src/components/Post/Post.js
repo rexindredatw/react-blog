@@ -18,7 +18,7 @@ const PostItem = styled.li`
   :hover {
     opacity: 0.5;
     a {
-      color: red;
+      color: ${({ theme }) => theme.text.highlight};
     }
   }
   background-color: ${({ theme }) => theme.background.opacity};
@@ -41,6 +41,7 @@ const PostRightContainer = styled.div`
 `;
 
 const PostDate = styled.div`
+  color: ${({ theme }) => theme.text.primary};
   display: flex;
   align-items: center;
   svg {

@@ -18,6 +18,7 @@ export const themes = {
       searchBox: "#6D1919",
       negative: "#fff",
       remind: "#888",
+      highlight: "#272AB0",
     },
     boxShadow: {
       primary: "0 0 30px rgba(33, 83, 154, 0.08)",
@@ -45,23 +46,24 @@ export const themes = {
   },
   dark: {
     background: {
-      body: "#293136",
-      primary: "#313B41",
+      body: "#212529",
+      primary: "#DEE2E6",
       header: "rgba(207, 224, 241, 0.08)",
-      searchBox: "#9cbfe2",
+      searchBox: "#C7D6D5",
       opacity: "rgba(207, 224, 241, 0.02)",
       popup: "#6E6E6E",
       toolbar: "#404040",
       toolbarOff: "#BABABA",
     },
-    primary: "#82B1FF",
+    primary: "#FEFAE0",
     text: {
       primary: "#F2F2F2",
       second: "#CCC",
       third: "#6d6d6d",
-      searchBox: "#293136",
-      negative: "#313B41",
+      searchBox: "#212529",
+      negative: "#DEE2E6",
       remind: "#aaa",
+      highlight: "#57DCBE",
     },
     boxShadow: {
       primary: "0 0 30px rgba(0, 0, 0, 0.1)",

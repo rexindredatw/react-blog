@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding-top: 64px;
     height: 100%;
-    font-family: 'Noto Sans TC', Open-Sans, Arial;
+    font-family: 'Hind Siliguri', sans-serif;
     font-weight: 400;
     background: ${({ theme }) => theme.background.body};
     transition: all 0.5s linear;

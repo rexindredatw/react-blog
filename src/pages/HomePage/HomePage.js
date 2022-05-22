@@ -66,9 +66,9 @@ const DescriptionButton = styled(Link)`
   margin-top: 24px;
   padding: 8px 40px 8px 20px;
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.text.searchBox};
+  background-color: ${({ theme }) => theme.background.searchBox};
   text-decoration: none;
-  color: ${({ theme }) => theme.background.primary};
+  color: ${({ theme }) => theme.text.searchBox};
   z-index: 0;
   svg {
     position: absolute;

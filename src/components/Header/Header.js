@@ -104,14 +104,14 @@ export default function Header() {
         <Brand to="/">Rex Blog</Brand>
         <NavbarList>
           <NavItem to="/" $active={location.pathname === "/"}>
-            首頁
+            Homepage
           </NavItem>
           <NavItem to="/posts" $active={location.pathname === "/posts"}>
-            文章列表
+            Posts
           </NavItem>
           {user && (
             <NavItem to="/add-post" $active={location.pathname === "/add-post"}>
-              發布文章
+              New Post
             </NavItem>
           )}
         </NavbarList>
@@ -121,17 +121,17 @@ export default function Header() {
         <SearchBox />
         {!user && (
           <NavItem to="/login" $active={location.pathname === "/login"}>
-            登入
+            Login
           </NavItem>
         )}
         {!user && (
           <NavItem to="/register" $active={location.pathname === "/register"}>
-            註冊
+            Register
           </NavItem>
         )}
         {user && (
           <NavItem to="/" onClick={handleLogOut}>
-            登出
+            Logout
           </NavItem>
         )}
       </NavbarList>

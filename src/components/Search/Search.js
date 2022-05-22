@@ -54,7 +54,7 @@ export default function SearchBox() {
       <SearchBar
         type="text"
         value={searchContent}
-        placeholder="尋找..."
+        placeholder="Search"
         onChange={handleSearchChange}
       />
       <SearchButton type="submit">
