@@ -4,10 +4,11 @@
 
 ### 這是使用 React, react-router-dom 及串接 Lidemy API 實作的 SPA 部落格
 
+|  測試用身份   |   | 
+|  ----  | ----  | 
+| 帳號  | test |
+| 密碼  | Lidemy |
 
-> 測試帳號：test 
-> 
-> 測試密碼：Lidemy
 
 [DEMO](https://rexindredatw.github.io/react-blog/)
 
@@ -34,6 +35,7 @@
 - 以 React 及 react-router-dom 實作 SPA
 - 以 JSX 及 styled-components 撰寫 component
 - 使用 function component 及 react hooks
+- 使用 ESLint 及 Prettier 統一程式碼撰寫風格
 
 ---
 
